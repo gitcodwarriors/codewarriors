@@ -1,1 +1,1 @@
-//dotnet related code goes to this dorectory
+//dotnet related code goes to this directory
