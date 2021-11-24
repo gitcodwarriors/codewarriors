@@ -44,18 +44,18 @@
 
 	/* CSS FOR SELECT2 V-4.0 */
 	.select2-container .select2-selection {
-    width: 100%;
-    height: 35px;
-    padding: 3px 12px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #33334F;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #E0E8F1;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    font-size: 14px;
-    border-radius: 5px;
+		width: 100%;
+		height: 35px;
+		padding: 3px 12px;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #33334F;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #E0E8F1;
+		transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+		font-size: 14px;
+		border-radius: 5px;
 	}
 
 	.select2-container .select2-selection--single .select2-selection__rendered {
@@ -67,37 +67,37 @@
 	}
 
 	.select2-container.select2-container--open .select2-dropdown{
-    background: #FFFFFF;
-    border: 1px solid #D3D8DE;
-    box-sizing: border-box;
-    box-shadow: 0px 6.02273px 15.6591px rgb(112 112 132 / 15%);
-    border-radius: 7px;
-    margin-top: 5px;
-    padding: 13px 9px;
+		background: #FFFFFF;
+		border: 1px solid #D3D8DE;
+		box-sizing: border-box;
+		box-shadow: 0px 6.02273px 15.6591px rgb(112 112 132 / 15%);
+		border-radius: 7px;
+		margin-top: 5px;
+		padding: 13px 9px;
 	}
 
 	.select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #1C3E95;
-    color: #fff;
+		background-color: #1C3E95;
+		color: #fff;
 	}
 
 	.select2-container--default .select2-results__option--highlighted[aria-selected] {
-    color: #1C3E95;
-    font-weight: 700;
-    background-color: #fff;
+		color: #1C3E95;
+		font-weight: 700;
+		background-color: #fff;
 	}
 
 </style>
 <link rel="stylesheet" href="{{asset('css/lightbox.css')}}"/>
 
 <div class="card">
-    <div class="card-body">
+	<div class="card-body">
 		<div class="facility-profile section-header mobile-icon">
 			<div class="row">
 				<div class="col-12 input-group-prepend mr-0">
 					<select class="" name="facility_id" style="width:100%" id="facility_id">
-					<?php $selectedFacility = null; ?>
-					@foreach($facilities as $facility)
+						<?php $selectedFacility = null; ?>
+						@foreach($facilities as $facility)
 						<?php 
 							if($facility->id == $facilityId){
 								$selectedFacility = $facility;
@@ -108,7 +108,7 @@
 						@else
 						<option value="{{$facility->id}}">{{$facility->name}} - {{$facility->address}}, {{$facility->city}}, {{$facility->postal_code}} {{$facility->zipcode}}</option> 
 						@endif
-					@endforeach
+						@endforeach
 					</select>
 				</div>
 			</div>
@@ -141,11 +141,11 @@
 			<div class="w-100">
 				<select class="form-control" name="invoiceYear" id="invoiceYear" style="width: 90px;">
 					@foreach($yearsInDropdown as $index => $year)
-						@if($year == $selectedYear)
-						<option value="{{$year}}" selected>{{$year}}</option>
-						@else
-						<option value="{{$year}}">{{$year}}</option>
-						@endif
+					@if($year == $selectedYear)
+					<option value="{{$year}}" selected>{{$year}}</option>
+					@else
+					<option value="{{$year}}">{{$year}}</option>
+					@endif
 					@endforeach
 				</select>
 			</div>
@@ -186,48 +186,48 @@
 				</div>
 				<div class="col-11 d-flex position-relative flex-wrap">
 					@if(isset($invoicesAndAttachments->toArray()[$month->sequence_no]))
-						@foreach($invoicesAndAttachments->toArray()[$month->sequence_no] as $invoicesAndAttachment)
-						<div class="file-wrapper mx-3 viewFileInNewTab" id="attachment_{{$invoicesAndAttachment['id']}}">
-							<a href="javascript:;" style="z-index:1;" class="delete-btn alert-danger fas fa-times text-decoration-none d-none"></a>
-							@if(in_array(strtolower($invoicesAndAttachment['file_extension']), ['jpg','jpeg', 'png', 'gif', 'tiff', 'psd', 'pdf']))
-								@if(in_array(strtolower($invoicesAndAttachment['file_extension']), ['jpg','jpeg', 'png', 'gif', 'tiff']))
-								<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-									<a href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" data-lightbox="example-1.jpg">
-										<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset($invoicesAndAttachment['attachment_view_path'])}}" alt="{{$invoicesAndAttachment['name']}}">
-									</a>
-								</div>
-								@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['pdf', 'psd'])))
-								<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-									<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/pdf.png')}}" alt="{{$invoicesAndAttachment['name']}}">
-								</div>
-								@endif
-							@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['xlsx','xls'])))
-							<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-								<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/excel.png')}}" alt="{{$invoicesAndAttachment['name']}}">
-							</div>
-							@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['txt','sql'])))
-							<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-								<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/txt.png')}}" alt="{{$invoicesAndAttachment['name']}}">
-							</div>
-							@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['docx','doc'])))
-							<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-								<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/word.png')}}" alt="{{$invoicesAndAttachment['name']}}">
-							</div>
-							@else
-							<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
-								<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/file-default.png')}}" alt="{{$invoicesAndAttachment['name']}}">
-							</div>
-							@endif
-
-							<div class="file-title">
-								<h6 class="mb-0">
-									<a href="{{$invoicesAndAttachment['attachment_view_path']}}" class="d-block" target="_blank">
-										{{$invoicesAndAttachment['name']}}
-									</a>
-								</h6> 
-							</div>
+					@foreach($invoicesAndAttachments->toArray()[$month->sequence_no] as $invoicesAndAttachment)
+					<div class="file-wrapper mx-3 viewFileInNewTab" id="attachment_{{$invoicesAndAttachment['id']}}">
+						<a href="javascript:;" style="z-index:1;" class="delete-btn alert-danger fas fa-times text-decoration-none d-none"></a>
+						@if(in_array(strtolower($invoicesAndAttachment['file_extension']), ['jpg','jpeg', 'png', 'gif', 'tiff', 'psd', 'pdf']))
+						@if(in_array(strtolower($invoicesAndAttachment['file_extension']), ['jpg','jpeg', 'png', 'gif', 'tiff']))
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<a href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" data-lightbox="example-1.jpg">
+								<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset($invoicesAndAttachment['attachment_view_path'])}}" alt="{{$invoicesAndAttachment['name']}}">
+							</a>
 						</div>
-						@endforeach
+						@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['pdf', 'psd'])))
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/pdf.png')}}" alt="{{$invoicesAndAttachment['name']}}">
+						</div>
+						@endif
+						@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['xlsx','xls'])))
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/excel.png')}}" alt="{{$invoicesAndAttachment['name']}}">
+						</div>
+						@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['txt','sql'])))
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/txt.png')}}" alt="{{$invoicesAndAttachment['name']}}">
+						</div>
+						@elseif(strtolower(in_array(strtolower($invoicesAndAttachment['file_extension']), ['docx','doc'])))
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/word.png')}}" alt="{{$invoicesAndAttachment['name']}}">
+						</div>
+						@else
+						<div class="file-image viewFileInNewTab" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}">
+							<img class="img-fluid" data-name="{{$invoicesAndAttachment['name']}}" data-id="{{$invoicesAndAttachment['id']}}" data-href="{{asset($invoicesAndAttachment['attachment_view_path'])}}" style="height: 102px;" src="{{asset('/img/icon/file-default.png')}}" alt="{{$invoicesAndAttachment['name']}}">
+						</div>
+						@endif
+
+						<div class="file-title">
+							<h6 class="mb-0">
+								<a href="{{$invoicesAndAttachment['attachment_view_path']}}" class="d-block" target="_blank">
+									{{$invoicesAndAttachment['name']}}
+								</a>
+							</h6> 
+						</div>
+					</div>
+					@endforeach
 					@endif
 				</div>
 			</div>
@@ -264,15 +264,15 @@
 	</div>
 </div>
 <style type="text/css">
-  .search-input-box-frame .select2-container .select2-choice {
-    color: #3654FF;
-    border-color: #3654FF;
-    border-radius: 0;
-  }
+	.search-input-box-frame .select2-container .select2-choice {
+		color: #3654FF;
+		border-color: #3654FF;
+		border-radius: 0;
+	}
 
-.select2{
-  width: 100%;
-}
+	.select2{
+		width: 100%;
+	}
 </style>
 @endsection
 
@@ -300,8 +300,8 @@
 			showImageNumberLabel:false,
 		})
 
-    $('#facility_id').select2();
-    $('#invoiceYear').select2();
+		$('#facility_id').select2();
+		$('#invoiceYear').select2();
 
 		$(document).on('click', '.invoicesDownload', function(e){
 			let url = $(this).children('span').data('filedownloadlink');
@@ -354,10 +354,10 @@
 			$(this).siblings('.invoicesAttachments').trigger('click');
 		})
 
-    $('#facility_id').change(function(){
-      var id = $(this).val();
-      updateSelectedFacilityForUsers(id);
-    });
+		$('#facility_id').change(function(){
+			var id = $(this).val();
+			updateSelectedFacilityForUsers(id);
+		});
 
 		$('#invoiceYear').on("change", function(e) {
 			let url = "{{route('invoices.index')}}?selectedYear=" + $(this).val();
@@ -416,8 +416,8 @@
 				break;
 				
 				case "rename":
-					$("#renameAttachmentButton").trigger('click');
-					break;
+				$("#renameAttachmentButton").trigger('click');
+				break;
 			}
 			// Hide it AFTER the action was triggered
 			$(".custom-menu").hide(100);
@@ -431,7 +431,7 @@
 				data: {'facility_id': id},
 				success: function(response) {
 					if(response.status === true){
-			      window.location.href = reloadLocationUrl;
+						window.location.href = reloadLocationUrl;
 					}
 					else{
 						toastr.error(response.message, 'Error', { timeOut: 1000, fadeOut: 1000});
@@ -466,7 +466,7 @@
 				callback: function (result) {
 					if(result)	deleteInvoiceAttachmentById(id)
 				}
-			});
+		});
 		}
 	});
 </script>
