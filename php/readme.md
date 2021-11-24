@@ -1,1 +1,1 @@
-//php related code goes to this dorectory
+//php related code goes to this directory
