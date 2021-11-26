@@ -18,7 +18,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is used for permissions to different modules in the invoices
-	params :no parameters required
 	*/
 	function __construct()
 	{
@@ -31,7 +30,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is used to view the landing page of the Invoices
-	Params: $request object
 	*/
 	public function invoicesIndex(Request $request)
 	{
@@ -51,7 +49,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is updating UserFacilityData for invoices
-	Params: $user, $facilityId
 	*/
 	public function updateUserFacilityData($user, $facilityId)
 	{
@@ -60,7 +57,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is Fetching ValidYearSelection for invoices
-	Params: $startFrom, $currentYear, $selectedYear
 	*/
 	public function getValidYearSelection($startFrom, $currentYear, $selectedYear)
 	{
@@ -72,7 +68,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is Fetching YearsForInvoicesDropdown
-	Params: no parameters required
 	*/
 	public function getYearsForInvoicesDropdown()
 	{
@@ -86,7 +81,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is returning the valid months that need to be shown on web page to upload invoices based on year
-	Params: $year
 	*/
 	public function getMonthsArrayToShow($year)
 	{
@@ -100,7 +94,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is fetching Facility Invoices & Attachments by FacilityId and Year
-	Params: $faciltyId, $selectedYear
 	*/
 	public function getFacilityInvoicesAndAttachments($faciltyId, $selectedYear)
 	{
@@ -109,7 +102,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is storing Invoices
-	Params: $request object
 	*/
 	public function invoicesStore(Request $request)
 	{
@@ -145,7 +137,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is used to create zip files of facility invoices for selected month in a year
-	Params: $facilityId, $year, $month
 	*/
 	public function invoicesDownloadAsZipByMonth($facilityId, $year, $month)
 	{
@@ -172,7 +163,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose:This function is fetching the MonthName by the month sequence no
-	Params: $monthSequence
 	*/
 	public function getMonthNameByMonthSequenceNo($monthSequence)
 	{
@@ -183,7 +173,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose:This function is deleting a single Invoice identified by an Id
-	Params:$request object
 	*/
 	public function invoicesDeleteSingleAttachmentById(Request $request)
 	{
@@ -206,7 +195,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose: This function is fetching a single Invoice By Id
-	Params: $id
 	*/
 	public function getInvoicesById($id)
 	{
@@ -232,7 +220,6 @@ class InvoiceController extends Controller
 
 	/*
 	@Purpose:This function is updating the Attachment Name in the Iinvoice
-	Params: $request object
 	*/
 	public function invoicesUpdateAttachmentName(Request $request)
 	{

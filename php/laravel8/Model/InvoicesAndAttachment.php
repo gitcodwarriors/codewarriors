@@ -12,7 +12,6 @@ class InvoicesAndAttachment extends Model
 
 	/*
 	@Purpose: This function is querying the database table to get the Invoice by Facility Id & Year
-	Params: $facilityId, $year  
 	*/
 	public function getByFacilityIdAndYear($facilityId, $year)
 	{
@@ -21,7 +20,6 @@ class InvoicesAndAttachment extends Model
 
 	/*
 	@Purpose: This function is querying the database table to get Invoice by Facility Id & Month and Year
-	Params: $facilityId, $year, $month  
 	*/
 	public function getByFacilityIdAndMonth($facilityId, $year, $month)
 	{
@@ -29,8 +27,7 @@ class InvoicesAndAttachment extends Model
 	}
 
 	/*
-	@Purpose: This function is inserting a new Invoice in the database table
-	Params: $request object  
+	@Purpose: This function is inserting a new Invoice in the database table  
 	*/
 	public function insertAttachments($request)
 	{
@@ -48,7 +45,6 @@ class InvoicesAndAttachment extends Model
 
 	/*
 	@Purpose: This function is setting a new key named "attachment_view_path" in the model object. It is  being used for path public path of Invoice.
-	Params: no parameters required  
 	*/
 	public function getAttachmentViewPathAttribute()
 	{
@@ -61,8 +57,7 @@ class InvoicesAndAttachment extends Model
 	}
 
 	/*
-	@Purpose: This function is setting a new key named "attachment_download_path" in the model object and generating a proper url. This url can be used to download the Invoice.
-	Params: no parameters required  
+	@Purpose: This function is setting a new key named "attachment_download_path" in the model object and generating a proper url. This url can be used to download the Invoice. 
 	*/
 	public function getAttachmentDownloadPathAttribute()
 	{
@@ -76,7 +71,6 @@ class InvoicesAndAttachment extends Model
 
 	/*
 	@Purpose: This function is used to delete the Invoice identified by an Id and also destroying the file from file system also.
-	Params: no parameters required  
 	*/
 	public function deleteById($id)
 	{
@@ -88,7 +82,6 @@ class InvoicesAndAttachment extends Model
 
 	/*
 	@Purpose: This function is used to update the name of Invoice identified by an Id
-	Params: $data  
 	*/
 	public function findAndUpdateName($data)
 	{
