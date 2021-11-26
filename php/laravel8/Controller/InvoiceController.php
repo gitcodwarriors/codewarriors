@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Validator;
 
 class InvoiceController extends Controller
 {
-	protected const START_YEAR = 2018;
+	protected const START_YEAR = 2018;   // start showing the invoices starting from this year
 
+	/*
+	@Purpose: This function is used for permissions to different modules in the invoices
+	params :no parameters required
+	*/
 	function __construct()
 	{
 		$this->middleware('permission:invoice-view|invoice-create|invoice-rename|invoice-delete|invoice-download-all', ['only' => 'invoicesIndex']);
@@ -25,7 +29,10 @@ class InvoiceController extends Controller
 		$this->middleware('permission:invoice-download-all', ['only' => ['invoicesDownloadAsZipByMonth']]);
 	}
 
-
+	/*
+	@Purpose: This function is used to view the landing page of the Invoices
+	Params: $request object
+	*/
 	public function invoicesIndex(Request $request)
 	{
 		$user = Auth::user();
@@ -42,11 +49,19 @@ class InvoiceController extends Controller
 		return view('communication.invoices', $data);
 	}
 
+	/*
+	@Purpose: This function is updating UserFacilityData for invoices
+	Params: $user, $facilityId
+	*/
 	public function updateUserFacilityData($user, $facilityId)
 	{
 		return $user->updateFacilityData($facilityId);
 	}
 
+	/*
+	@Purpose: This function is Fetching ValidYearSelection for invoices
+	Params: $startFrom, $currentYear, $selectedYear
+	*/
 	public function getValidYearSelection($startFrom, $currentYear, $selectedYear)
 	{
 		if($selectedYear > $currentYear || $selectedYear < $startFrom)
@@ -55,6 +70,10 @@ class InvoiceController extends Controller
 			return $selectedYear;
 	}
 
+	/*
+	@Purpose: This function is Fetching YearsForInvoicesDropdown
+	Params: no parameters required
+	*/
 	public function getYearsForInvoicesDropdown()
 	{
 		$currentYear = date("Y");
@@ -65,6 +84,10 @@ class InvoiceController extends Controller
 		return array_values($yearsList);
 	}
 
+	/*
+	@Purpose: This function is returning the valid months that need to be shown on web page to upload invoices based on year
+	Params: $year
+	*/
 	public function getMonthsArrayToShow($year)
 	{
 		$path = base_path('data/months.json');
@@ -75,11 +98,19 @@ class InvoiceController extends Controller
 		return array_values($monthsArrayToShow);
 	}
 
+	/*
+	@Purpose: This function is fetching Facility Invoices & Attachments by FacilityId and Year
+	Params: $faciltyId, $selectedYear
+	*/
 	public function getFacilityInvoicesAndAttachments($faciltyId, $selectedYear)
 	{
 		return $invoicesAndAttachment = (new InvoicesAndAttachment())->getByFacilityIdAndYear($faciltyId, $selectedYear);
 	}
 
+	/*
+	@Purpose: This function is storing Invoices
+	Params: $request object
+	*/
 	public function invoicesStore(Request $request)
 	{
 		$input_data = $request->all();
@@ -112,6 +143,10 @@ class InvoiceController extends Controller
 		];
 	}
 
+	/*
+	@Purpose: This function is used to create zip files of facility invoices for selected month in a year
+	Params: $facilityId, $year, $month
+	*/
 	public function invoicesDownloadAsZipByMonth($facilityId, $year, $month)
 	{
 		$invoiceAttchments = (new InvoicesAndAttachment())->getByFacilityIdAndMonth($facilityId, $year, $month);
@@ -135,6 +170,10 @@ class InvoiceController extends Controller
 		return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
 	}
 
+	/*
+	@Purpose:This function is fetching the MonthName by the month sequence no
+	Params: $monthSequence
+	*/
 	public function getMonthNameByMonthSequenceNo($monthSequence)
 	{
 		$path = base_path('data/months.json');
@@ -142,6 +181,10 @@ class InvoiceController extends Controller
 		return $monthsArray[$monthSequence - 1]->name;
 	}
 
+	/*
+	@Purpose:This function is deleting a single Invoice identified by an Id
+	Params:$request object
+	*/
 	public function invoicesDeleteSingleAttachmentById(Request $request)
 	{
 		$validated = request()->validate([
@@ -161,6 +204,10 @@ class InvoiceController extends Controller
 		];
 	}
 
+	/*
+	@Purpose: This function is fetching a single Invoice By Id
+	Params: $id
+	*/
 	public function getInvoicesById($id)
 	{
 		$validator = Validator::make(['id' => $id], [
@@ -182,6 +229,11 @@ class InvoiceController extends Controller
 			]
 		];
 	}
+
+	/*
+	@Purpose:This function is updating the Attachment Name in the Iinvoice
+	Params: $request object
+	*/
 	public function invoicesUpdateAttachmentName(Request $request)
 	{
 		$validated = request()->validate([
